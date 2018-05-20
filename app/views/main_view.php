@@ -3,6 +3,44 @@
 //echo "<pre>";
 //var_dump($data); die;
 ?>
+<div class="row">
+    <div class="col-6">
+        <div class="btn-group">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by name
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="?page=<?= $_GET['page']?>&sort=user_name_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
+                    <a href="?page=<?= $_GET['page']?>&sort=user_name_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by email
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="?page=<?= $_GET['page']?>&sort=email_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
+                    <a href="?page=<?= $_GET['page']?>&sort=email_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by status
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href="?page=<?= $_GET['page']?>&sort=status_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
+                    <a href="?page=<?= $_GET['page']?>&sort=status_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="table">
     <thead>
     <tr>
@@ -34,7 +72,7 @@
     <?php
     if ($data['pages'] >1) :
     for ($data['page']=1; $data['page'] <= $data['pages'] ; $data['page']++):?>
-        <li class="page-item"><a class="page-link" href="<?php echo "?page=".$data['page'].""; ?>"><?php  echo $data['page']; ?></a></li>
+        <li class="page-item"><a class="page-link" href="<?php echo "?page=".$data['page'].""; ?><?php if (isset($_GET['sort'])) {echo "&sort=". $_GET['sort']; }?>"><?php  echo $data['page']; ?></a></li>
 
 
     <?php endfor; ?>

@@ -22,18 +22,62 @@ class Model_Main extends Model {
     public function get_data() {
         $pdo = $this->getConnectDb();
 
+        $sort = $this->getSort();
         $this->getPagination();
         $query = "
           SELECT * 
           FROM task
           LEFT JOIN task_text
           ON task.id = task_text.id_task
+          $sort
           LIMIT $this->starting_limit, $this->limit
         ";
         $stmt = $pdo->prepare($query);
 
         $stmt->execute();
-        return $stmt->fetchAll();
+
+        $arr = $stmt->fetchAll();
+
+//                echo "<pre>";
+//        var_dump($arr); die;
+        return $arr;
+//        dirs = $this->getSort($_GET['sort'], $dirs);
+    }
+
+    private function checkGet() {
+        return isset($_GET['sort']);
+    }
+
+    private function getSort() {
+        if ($this->checkGet()) {
+
+            switch ($_GET['sort']) {
+                case 'user_name_asc':
+                    $order = 'user_name ASC';
+                    break;
+                case 'user_name_desc':
+                    $order = 'user_name DESC';
+                    break;
+                case 'email_asc':
+                    $order = 'email ASC';
+                    break;
+
+                case 'email_desc':
+                    $order = 'email DESC';
+                    break;
+                case 'status_asc':
+                    $order = 'status ASC';
+                    break;
+                case 'status_desc':
+                    $order = 'status DESC';
+                    break;
+                default:
+                    $order = 'user_name ASC';
+
+            }
+            return 'ORDER BY '.$order;
+        }
+
     }
 
     public function getModal($data) {
@@ -213,4 +257,6 @@ class Model_Main extends Model {
         }
         return 'http://'.$_SERVER['HTTP_HOST'] . '/upload/' . $_FILES['image']['name'];
     }
+
+
 }
