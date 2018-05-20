@@ -20,7 +20,6 @@
                     <input type="file" name="image" class="form-control-file" id="image">
                 </div>
                 <input type="submit" class="btn btn-primary" name="create[submit]" value="Submit">
-<!--                <input type="submit" class="btn btn-primary" name="create[preview]" value="Preview">-->
                 <button type="button" class="btn btn-primary" data-toggle="modal" id="prev" data-target="#exampleModal">
                     Preview
                 </button>

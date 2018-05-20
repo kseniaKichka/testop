@@ -150,7 +150,6 @@ class Model_Main extends Model {
     }
 
     public function getuploadDir() {
-//        return $_SERVER['DOCUMENT_ROOT']. '/upload/';
         return '/upload/';
     }
 

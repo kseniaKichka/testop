@@ -1,4 +1,3 @@
-<?php //echo "<pre>"; var_dump($data['text']); die; ?>
 <div class="container">
     <div class="row justify-content-start">
         <div class="col-4 offset-4">
