@@ -26,14 +26,13 @@ class Controller_Main extends Controller {
 
     function action_create() {
 
-        if (isset($_POST) && !empty($_FILES)) {
-            echo json_encode($this->model->uploadFile($_FILES)); die;
-        }
-
         if (isset($_POST['create']) && isset($_POST['create']['submit'])) {
             $this->model->setTest($_POST['create'], $this->model->uploadFile($_FILES));
             $host = 'http://'.$_SERVER['HTTP_HOST'].'/main';
             header('Location:'.$host);
+        }
+        if (isset($_POST) && !empty($_FILES)) {
+            echo json_encode($this->model->uploadFile($_FILES)); die;
         }
 
         if (isset($_POST['create']) && isset($_POST['create']['preview'])) {

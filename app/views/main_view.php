@@ -1,18 +1,26 @@
-<div class="h2">Tasks</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="h2">Tasks</div>
+        </div>
+    </div>
+</div>
 <?php
-//echo "<pre>";
-//var_dump($data); die;
+$page = 1;
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
 ?>
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <div class="btn-group">
             <div class="dropdown">
                 <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sort by name
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="?page=<?= $_GET['page']?>&sort=user_name_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
-                    <a href="?page=<?= $_GET['page']?>&sort=user_name_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
+                    <a href="?page=<?= $page?>&sort=user_name_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
+                    <a href="?page=<?= $page?>&sort=user_name_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
                 </div>
             </div>
         </div>
@@ -22,8 +30,8 @@
                     Sort by email
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="?page=<?= $_GET['page']?>&sort=email_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
-                    <a href="?page=<?= $_GET['page']?>&sort=email_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
+                    <a href="?page=<?= $page?>&sort=email_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
+                    <a href="?page=<?= $page?>&sort=email_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
                 </div>
             </div>
         </div>
@@ -33,8 +41,8 @@
                     Sort by status
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href="?page=<?= $_GET['page']?>&sort=status_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
-                    <a href="?page=<?= $_GET['page']?>&sort=status_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
+                    <a href="?page=<?= $page?>&sort=status_asc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">ASC</a>
+                    <a href="?page=<?= $page?>&sort=status_desc" class="btn btn-outline-primary btn-sm " role="button" aria-pressed="true">DESC</a>
                 </div>
             </div>
         </div>
@@ -57,7 +65,7 @@
         <?php foreach ($data['data'] as $val) : ?>
             <tr>
                 <th scope="row"><?= $val['id'] ?></th>
-                <td><img src="<?= $val['image_path'] ?>"></td>
+                <td class="text-center"><img  src="<?= !empty($val['image_path']) ? $val['image_path'] : '/images/no-photo.png' ?>"></td>
                 <td><?= $val['email'] ?></td>
                 <td><?= $val['user_name'] ?></td>
                 <td><?= $val['text'] ?></td>
@@ -73,7 +81,6 @@
     if ($data['pages'] >1) :
     for ($data['page']=1; $data['page'] <= $data['pages'] ; $data['page']++):?>
         <li class="page-item"><a class="page-link" href="<?php echo "?page=".$data['page'].""; ?><?php if (isset($_GET['sort'])) {echo "&sort=". $_GET['sort']; }?>"><?php  echo $data['page']; ?></a></li>
-
 
     <?php endfor; ?>
     <?php endif; ?>

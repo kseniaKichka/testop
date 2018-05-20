@@ -5,15 +5,15 @@
             <form action="" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">User Name</label>
-                    <input type="text" name="create[user_name]" onchange="document.getElementById('user_name_p').value = document.getElementById('user_name').value" class="form-control" id="user_name" placeholder="Enter user name">
+                    <input type="text" name="create[user_name]" onchange="document.getElementById('user_name_p').value = document.getElementById('user_name').value" class="form-control" id="user_name" placeholder="Enter user name" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Email address</label>
-                    <input type="email" name="create[user_email]" onchange="document.getElementById('user_email_p').value = document.getElementById('user_email').value" class="form-control" id="user_email" placeholder="name@example.com">
+                    <input type="email" name="create[user_email]" onchange="document.getElementById('user_email_p').value = document.getElementById('user_email').value" class="form-control" id="user_email" placeholder="name@example.com" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Task Text</label>
-                    <textarea class="form-control" onchange="document.getElementById('text_p').value = document.getElementById('text').value" name="create[text]" id="text" rows="3"></textarea>
+                    <textarea class="form-control" onchange="document.getElementById('text_p').value = document.getElementById('text').value" name="create[text]" id="text" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Image</label>

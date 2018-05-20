@@ -2,7 +2,7 @@
 
 class Model_Main extends Model {
 
-    public $limit = 2;
+    public $limit = 3;
     public $starting_limit;
     public $page = 1;
     public $total_pages;
@@ -38,10 +38,8 @@ class Model_Main extends Model {
 
         $arr = $stmt->fetchAll();
 
-//                echo "<pre>";
-//        var_dump($arr); die;
         return $arr;
-//        dirs = $this->getSort($_GET['sort'], $dirs);
+
     }
 
     private function checkGet() {
@@ -152,7 +150,8 @@ class Model_Main extends Model {
     }
 
     public function getuploadDir() {
-        return $_SERVER['DOCUMENT_ROOT']. '/upload/';
+//        return $_SERVER['DOCUMENT_ROOT']. '/upload/';
+        return '/upload/';
     }
 
     public function getUploadFile($img) {
@@ -255,7 +254,7 @@ class Model_Main extends Model {
         } elseif ($img['image']['type'] == 'image/gif') {
             imagegif($thumb, $_SERVER['DOCUMENT_ROOT'] . '/upload/' . $_FILES['image']['name']);
         }
-        return 'http://'.$_SERVER['HTTP_HOST'] . '/upload/' . $_FILES['image']['name'];
+        return '/upload/' . $_FILES['image']['name'];
     }
 
 
