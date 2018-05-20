@@ -8,13 +8,14 @@ class Controller_Admin extends Controller {
     }
 
     public function action_index() {
+
         if (isset($_POST['admin'])) {
             if ($res = $this->model->check($_POST['admin'])) {
                 $this->model->login($res);
             }
         }
 
-        if (isset($_COOKIE['id'])) {
+        if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
             $host = 'http://'.$_SERVER['HTTP_HOST'].'/panel';
             header('Location:'.$host);
         }
@@ -27,8 +28,12 @@ class Controller_Admin extends Controller {
     }
 
     public function action_logout() {
-        if (isset($_COOKIE['id']) ) {
-            $this->model->logout($this->model->getCookie('id'));
+        if (isset($_SESSION['id']) ) {
+            $this->model->logout('id');
+
         }
+        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        header('Location:'.$host);
+
     }
 }

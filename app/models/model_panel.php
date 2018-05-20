@@ -7,6 +7,12 @@ class Model_Panel extends Model_Main {
         return Db::getConnection();
     }
 
+    public function checkLogin() {
+        if (!isset($_SESSION['id'])) {
+            $host = 'http://'.$_SERVER['HTTP_HOST'].'/admin';
+            header('Location:'.$host);
+        }
+    }
 
     public function getTask($id) {
 

@@ -9,9 +9,14 @@ class Model_Main extends Model {
     private $width = 320;
     private $height = 240;
     private $types = array('image/gif', 'image/png', 'image/jpeg');
+    public $status = array(0 => 'Opened', 1 => 'Completed');
 
     public function getConnectDb() {
         return Db::getConnection();
+    }
+
+    public function getStatuses() {
+        return $this->status;
     }
 
     public function get_data() {
@@ -29,6 +34,10 @@ class Model_Main extends Model {
 
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    public function getModal($data) {
+
     }
 
     public function getPagination() {
@@ -115,7 +124,7 @@ class Model_Main extends Model {
         if ($this->checkType($img)) {
             if ($this->checkSize($img)) {
                 if ($this->setUploadFile($img, $this->getUploadFile($img))) {
-                    return $uploadfile;
+                    return $this->getUploadFile($img);
                 }
             } else {
                 return $this->resizeImg($img, $this->getSize($img), false, $img["image"]["tmp_name"]);
@@ -169,7 +178,7 @@ class Model_Main extends Model {
 
         $thumb = $this->getCreate($new_size);
 
-        $this->getImageCopy(getImageCopy($thumb, $source, $src_pos, $new_size, $size));
+        $this->getImageCopy($thumb, $source, $src_pos, $new_size, $size);
 
         if ($i = $this->saveImg($thumb, $img)) {
             return $i;
@@ -202,6 +211,6 @@ class Model_Main extends Model {
         } elseif ($img['image']['type'] == 'image/gif') {
             imagegif($thumb, $_SERVER['DOCUMENT_ROOT'] . '/upload/' . $_FILES['image']['name']);
         }
-        return $_SERVER['DOCUMENT_ROOT'] . '/upload/' . $_FILES['image']['name'];
+        return 'http://'.$_SERVER['HTTP_HOST'] . '/upload/' . $_FILES['image']['name'];
     }
 }

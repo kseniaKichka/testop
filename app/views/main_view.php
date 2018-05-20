@@ -7,6 +7,7 @@
     <thead>
     <tr>
         <th scope="col">Id</th>
+        <th scope="col">Image</th>
         <th scope="col">User Email</th>
         <th scope="col">User Name</th>
         <th scope="col">Task Text </th>
@@ -18,23 +19,25 @@
         <?php foreach ($data['data'] as $val) : ?>
             <tr>
                 <th scope="row"><?= $val['id'] ?></th>
+                <td><img src="<?= $val['image_path'] ?>"></td>
                 <td><?= $val['email'] ?></td>
                 <td><?= $val['user_name'] ?></td>
                 <td><?= $val['text'] ?></td>
                 <td><?= $val['date_create'] ?></td>
-                <td><?= $val['status'] ?></td>
+                <td><?= $data['status'][$val['status']] ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-<?php
-if ($data['pages'] >1) :
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <?php
+    if ($data['pages'] >1) :
+    for ($data['page']=1; $data['page'] <= $data['pages'] ; $data['page']++):?>
+        <li class="page-item"><a class="page-link" href="<?php echo "?page=".$data['page'].""; ?>"><?php  echo $data['page']; ?></a></li>
 
 
-for ($data['page']=1; $data['page'] <= $data['pages'] ; $data['page']++):?>
-
-<a href='<?php echo "?page=".$data['page'].""; ?>' class="links"><?php  echo $data['page']; ?>
- </a>
-
-<?php endfor; ?>
-<?php endif; ?>
+    <?php endfor; ?>
+    <?php endif; ?>
+  </ul>
+</nav>
