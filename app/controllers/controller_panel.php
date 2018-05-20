@@ -1,18 +1,18 @@
 <?php
 
-class Controller_Main extends Controller {
+class Controller_Panel extends Controller {
 
     public function __construct() {
-        $this->model = new Model_Main();
+        $this->model = new Model_Panel();
         $this->view = new View();
     }
 
-    function action_index() {
+    public function action_index() {
         $data = $this->model->get_data();
         $page = $this->model->getPage();
         $total_pages = $this->model->getTotalPages();
         $this->view->generate(
-            'main_view.php',
+            'panel_view.php',
             'template_view.php',
             array(
                 'data' => $data,
@@ -22,16 +22,19 @@ class Controller_Main extends Controller {
         );
     }
 
-    function action_create() {
-        if (isset($_POST['create'])) {
-            $this->model->setTest($_POST['create'], $this->model->uploadFile($_FILES));
-            $host = 'http://'.$_SERVER['HTTP_HOST'].'/main';
+    public function action_edit() {
+        if (isset($_POST['update'])) {
+            $this->model->updateTask($_POST['update']);
+            $host = 'http://'.$_SERVER['HTTP_HOST'].'/panel';
             header('Location:'.$host);
         }
+        $data = $this->model->getTask($_GET['id']);
 
         $this->view->generate(
-            'main_create_view.php',
-            'template_view.php'
+            'panel_edit_view.php',
+            'template_view.php',
+             $data
+
         );
     }
 }

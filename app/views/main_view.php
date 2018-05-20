@@ -28,6 +28,8 @@
     </tbody>
 </table>
 <?php
+if ($data['pages'] >1) :
+
 
 for ($data['page']=1; $data['page'] <= $data['pages'] ; $data['page']++):?>
 
@@ -35,3 +37,4 @@ for ($data['page']=1; $data['page'] <= $data['pages'] ; $data['page']++):?>
  </a>
 
 <?php endfor; ?>
+<?php endif; ?>
