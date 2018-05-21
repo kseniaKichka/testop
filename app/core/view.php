@@ -1,17 +1,8 @@
 <?php
 
-class View
-{
-    //public $template_view; // здесь можно указать общий вид по умолчанию.
+class View {
 
-    function generate($content_view, $template_view, $data = null)
-    {
-        /*
-        if(is_array($data)) {
-            // преобразуем элементы массива в переменные
-            extract($data);
-        }
-        */
+    function generate($content_view, $template_view, $data = null) {
 
         include 'app/views/'.$template_view;
     }
